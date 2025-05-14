@@ -49,11 +49,11 @@ The algorithm follows these key steps:
    cd 17Live_Solution
    ./setup.sh
    ```
-3. **Run the example input json"**:
+3. **Run the example input json**:
     ```
     java -jar target/17Live_Solution-1.0-SNAPSHOT-jar-with-dependencies.jar input.json
     ```
-4. **Run the testcases"**:
+4. **Run the testcases**:
     ```
     java -jar target/17Live_Solution-1.0-SNAPSHOT-jar-with-dependencies.jar test_cases
     ```
