@@ -69,7 +69,7 @@ This section outlines the test cases developed for the 17Live stream deduplicati
 
 We've designed four comprehensive test cases to validate our solution:
 
-1. **Normal Case** - Tests the basic functionality using the sample input from the assignment
+1. **Normal Case** - Tests the basic functionality using the sample input similar to one from the assignment
 2. **Small Sections** - Tests handling of sections with fewer than 3 streams
 3. **Extensive Duplication** - Tests behavior when many sections have the same top streams
 4. **Not Enough Unique Streams** - Tests the failure case when there aren't enough unique streams
