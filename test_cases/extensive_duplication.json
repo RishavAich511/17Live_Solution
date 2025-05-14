@@ -1,0 +1,42 @@
+[
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "d"},
+      {"streamerID": "e"}
+    ],
+    "sectionID": "Section1"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "f"},
+      {"streamerID": "g"}
+    ],
+    "sectionID": "Section2"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "h"},
+      {"streamerID": "i"}
+    ],
+    "sectionID": "Section3"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "j"},
+      {"streamerID": "k"}
+    ],
+    "sectionID": "Section4"
+  }
+]

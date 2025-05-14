@@ -1,0 +1,52 @@
+[
+    {
+      "sectionData": [
+        {"streamerID": "a"},
+        {"streamerID": "b"},
+        {"streamerID": "c"},
+        {"streamerID": "d"},
+        {"streamerID": "e"},
+        {"streamerID": "f"},
+        {"streamerID": "g"},
+        {"streamerID": "h"},
+        {"streamerID": "i"},
+        {"streamerID": "j"}
+      ],
+      "lokalisedKey": "streamers_daily_life_updates",
+      "sectionID": "Streamers' Daily Life Updates"
+    },
+    {
+      "mlDynamicLabel": true,
+      "labelID": "",
+      "sectionData": [
+        {"streamerID": "a"},
+        {"streamerID": "b"},
+        {"streamerID": "d"},
+        {"streamerID": "e"},
+        {"streamerID": "f"},
+        {"streamerID": "g"},
+        {"streamerID": "h"},
+        {"streamerID": "i"},
+        {"streamerID": "j"},
+        {"streamerID": "k"}
+      ],
+      "sectionID": "Social Media Trends & Influencers"
+    },
+    {
+      "mlDynamicLabel": true,
+      "sectionData": [
+        {"streamerID": "c"},
+        {"streamerID": "d"},
+        {"streamerID": "e"},
+        {"streamerID": "f"},
+        {"streamerID": "g"},
+        {"streamerID": "h"},
+        {"streamerID": "i"},
+        {"streamerID": "j"},
+        {"streamerID": "k"},
+        {"streamerID": "l"}
+      ],
+      "lokalisedKey": "music",
+      "sectionID": "music"
+    }
+]

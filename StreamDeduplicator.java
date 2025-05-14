@@ -1,7 +1,10 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,22 +12,108 @@ import org.json.JSONObject;
 public class StreamDeduplicator {
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println("Usage: java -jar StreamDeduplicator.jar <input_file_path>");
+            System.out.println("Usage: java -jar StreamDeduplicator.jar <file_or_directory_path>");
             return;
         }
 
+        String inputPath = args[0];
+        Path path = Paths.get(inputPath);
+        
+        if (!Files.exists(path)) {
+            System.err.println("Error: The specified path does not exist.");
+            return;
+        }
+        
+        // Create output directory if it doesn't exist
+        Path outputDirectory = Paths.get("output");
         try {
-            String inputJson = new String(Files.readAllBytes(Paths.get(args[0])));
-            String outputJson = processStreams(inputJson);
-            
-            // Write output to a file
-            Files.write(Paths.get("output.json"), outputJson.getBytes());
-            System.out.println("Processing complete! Output written to output.json");
+            if (!Files.exists(outputDirectory)) {
+                Files.createDirectory(outputDirectory);
+            }
         } catch (IOException e) {
-            System.err.println("Error reading input file: " + e.getMessage());
+            System.err.println("Error creating output directory: " + e.getMessage());
+            return;
+        }
+        
+        try {
+            List<Path> filesToProcess = new ArrayList<>();
+            
+            // Check if the input is a directory or a single file
+            if (Files.isDirectory(path)) {
+                // Process all JSON files in the directory
+                System.out.println("Processing directory: " + inputPath);
+                
+                try (Stream<Path> paths = Files.walk(path, 1)) {
+                    filesToProcess = paths
+                        .filter(Files::isRegularFile)
+                        .filter(p -> p.toString().toLowerCase().endsWith(".json"))
+                        .collect(Collectors.toList());
+                }
+                
+                if (filesToProcess.isEmpty()) {
+                    System.out.println("No JSON files found in the specified directory.");
+                    return;
+                }
+                
+                System.out.println("Found " + filesToProcess.size() + " JSON file(s).");
+            } else if (Files.isRegularFile(path)) {
+                // Process single file
+                if (!path.toString().toLowerCase().endsWith(".json")) {
+                    System.err.println("Error: The specified file is not a JSON file.");
+                    return;
+                }
+                filesToProcess.add(path);
+                System.out.println("Processing single file: " + path.getFileName());
+            } else {
+                System.err.println("Error: The path is neither a file nor a directory.");
+                return;
+            }
+            
+            // Process each file
+            for (Path jsonFile : filesToProcess) {
+                String fileName = jsonFile.getFileName().toString();
+                System.out.println("Processing file: " + fileName);
+                
+                try {
+                    String inputJson = new String(Files.readAllBytes(jsonFile));
+                    String outputJson = Deduplicator.processStreams(inputJson);
+                    
+                    // Create output file name based on the input file name
+                    String outputFileName = getOutputFileName(fileName);
+                    Path outputPath = outputDirectory.resolve(outputFileName);
+                    
+                    // Write output to file
+                    Files.write(outputPath, outputJson.getBytes());
+                    System.out.println("  Processed: " + fileName + " -> " + outputPath);
+                } catch (Exception e) {
+                    System.err.println("  Error processing file " + fileName + ": " + e.getMessage());
+                }
+            }
+            
+            System.out.println("All files processed. Output files saved to the 'output' directory.");
+        } catch (IOException e) {
+            System.err.println("Error reading path: " + e.getMessage());
         }
     }
+    
+    /**
+     * Generates an appropriate output file name based on the input file name
+     */
+    private static String getOutputFileName(String inputFileName) {
+        // Remove .json extension if present
+        String baseName = inputFileName.toLowerCase().endsWith(".json") 
+            ? inputFileName.substring(0, inputFileName.length() - 5) 
+            : inputFileName;
+            
+        // Return with _output suffix and json extension
+        return baseName + "_output.json";
+    }
+}
 
+/**
+ * StreamDeduplicator class with the core deduplication logic
+ */
+class Deduplicator {
     public static String processStreams(String inputJson) {
         JSONArray sections = new JSONArray(inputJson);
         

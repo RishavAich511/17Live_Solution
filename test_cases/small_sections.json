@@ -1,0 +1,23 @@
+[
+    {
+        "sectionData": [
+            {"streamerID": "a"},
+            {"streamerID": "b"}
+        ],
+        "sectionID": "0"
+    },
+    {
+        "sectionData": [
+            {"streamerID": "c"},
+            {"streamerID": "a"}
+        ],
+        "sectionID": "1"
+    },
+    {
+        "sectionData": [
+            {"streamerID": "b"},
+            {"streamerID": "c"}
+        ],
+        "sectionID": "2"
+    }
+]

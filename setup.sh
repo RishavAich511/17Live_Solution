@@ -64,6 +64,172 @@ cat > input.json << 'EOL'
 ]
 EOL
 
+# Create test_cases directory if it doesn't exist
+mkdir -p test_cases
+
+# Create normal_case.json
+cat > test_cases/normal_case.json << 'EOL'
+[
+    {
+      "sectionData": [
+        {"streamerID": "a"},
+        {"streamerID": "b"},
+        {"streamerID": "c"},
+        {"streamerID": "d"},
+        {"streamerID": "e"},
+        {"streamerID": "f"},
+        {"streamerID": "g"},
+        {"streamerID": "h"},
+        {"streamerID": "i"},
+        {"streamerID": "j"}
+      ],
+      "lokalisedKey": "streamers_daily_life_updates",
+      "sectionID": "Streamers' Daily Life Updates"
+    },
+    {
+      "mlDynamicLabel": true,
+      "labelID": "",
+      "sectionData": [
+        {"streamerID": "a"},
+        {"streamerID": "b"},
+        {"streamerID": "d"},
+        {"streamerID": "e"},
+        {"streamerID": "f"},
+        {"streamerID": "g"},
+        {"streamerID": "h"},
+        {"streamerID": "i"},
+        {"streamerID": "j"},
+        {"streamerID": "k"}
+      ],
+      "sectionID": "Social Media Trends & Influencers"
+    },
+    {
+      "mlDynamicLabel": true,
+      "sectionData": [
+        {"streamerID": "c"},
+        {"streamerID": "d"},
+        {"streamerID": "e"},
+        {"streamerID": "f"},
+        {"streamerID": "g"},
+        {"streamerID": "h"},
+        {"streamerID": "i"},
+        {"streamerID": "j"},
+        {"streamerID": "k"},
+        {"streamerID": "l"}
+      ],
+      "lokalisedKey": "music",
+      "sectionID": "music"
+    }
+]
+EOL
+
+# Create small_sections.json
+cat > test_cases/small_sections.json << 'EOL'
+[
+    {
+        "sectionData": [
+            {"streamerID": "a"},
+            {"streamerID": "b"}
+        ],
+        "sectionID": "0"
+    },
+    {
+        "sectionData": [
+            {"streamerID": "c"},
+            {"streamerID": "a"}
+        ],
+        "sectionID": "1"
+    },
+    {
+        "sectionData": [
+            {"streamerID": "b"},
+            {"streamerID": "c"}
+        ],
+        "sectionID": "2"
+    }
+]
+EOL
+
+# Create extensive_duplication.json
+cat > test_cases/extensive_duplication.json << 'EOL'
+[
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "d"},
+      {"streamerID": "e"}
+    ],
+    "sectionID": "Section1"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "f"},
+      {"streamerID": "g"}
+    ],
+    "sectionID": "Section2"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "h"},
+      {"streamerID": "i"}
+    ],
+    "sectionID": "Section3"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "j"},
+      {"streamerID": "k"}
+    ],
+    "sectionID": "Section4"
+  }
+]
+EOL
+
+# Create not_enough_unique.json
+cat > test_cases/not_enough_unique.json << 'EOL'
+[
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "d"}
+    ],
+    "sectionID": "Section1"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "e"}
+    ],
+    "sectionID": "Section2"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "f"}
+    ],
+    "sectionID": "Section3"
+  }
+]
+EOL
+
+
 # Create a simple pom.xml file for Maven
 cat > pom.xml << 'EOL'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -141,5 +307,8 @@ mvn clean package
 
 echo "Setup complete!"
 echo ""
-echo "You can now run the application with:"
+echo "You can now run the example input json with:"
 echo "java -jar target/17Live_Solution-1.0-SNAPSHOT-jar-with-dependencies.jar input.json"
+echo ""
+echo "You can now run the testcases with:"
+echo "java -jar target/17Live_Solution-1.0-SNAPSHOT-jar-with-dependencies.jar test_cases"

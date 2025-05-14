@@ -1,0 +1,29 @@
+[
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "d"}
+    ],
+    "sectionID": "Section1"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "e"}
+    ],
+    "sectionID": "Section2"
+  },
+  {
+    "sectionData": [
+      {"streamerID": "a"},
+      {"streamerID": "b"},
+      {"streamerID": "c"},
+      {"streamerID": "f"}
+    ],
+    "sectionID": "Section3"
+  }
+]
